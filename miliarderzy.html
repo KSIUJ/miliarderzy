@@ -84,6 +84,8 @@
       background: #222 !important;
       color: #061130 !important;
     }
+    .answer {width: 450px; padding: 10px;}
+    .answerLetter { color: gold; }
   </style>
   <div id="container">
     <div id="money">
@@ -169,7 +171,7 @@ function nextQuestion(){
     var answer = question.odpowiedzi[nextAnswerId];
     question.odpowiedzi.splice(nextAnswerId,1);
     var isCurrentCorrect = (correct==answer);
-    var letter = String.fromCharCode(i+65)+") "
+    var letter = "<span class='answerLetter'>"+String.fromCharCode(i+65)+") "+"</span>"
     $("#body").append("<div class='answer' data-correct='"+isCurrentCorrect+"' onClick='selectAnswer(this, "+isCurrentCorrect+")'>"+letter+answer+"</div>")
   }
 }
@@ -191,7 +193,7 @@ function selectAnswer(caller, correct){
     }
   }
   else {
-    $(caller).css("background","red");
+    $(caller).css("background","#FF7904");
     $("#finishButton").addClass("_greenButton")
   }
 
