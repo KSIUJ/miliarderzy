@@ -82,7 +82,7 @@
       <div id="header">KSI-milionerzy</div>
       <div id="body"><button onClick="nextQuestion()" id="startButton">zaczynamy!</button></div>
       <div id="controls">
-        <button onClick="helpSplit()" id="helpSplitButton">pół<br />na pół</button>
+        <button onClick="helpSplit()" id="helpSplit">pół<br />na pół</button>
         <button onClick="helpPhone()" id="helpPhone">telefon do<br />przyjaciela</button>
         <button onClick="helpQuestion()" id="helpQuestion">pytanie do<br />publiczności</button>
         <button onClick="nextQuestion()" id="nextButton">następne<br />pytanie</button>
@@ -102,7 +102,9 @@ var points=0;
 var friendPhoneUsed=false, fiftyFiftyUsed=false, askPublicUsed=false; //safelines
 
 function helpSplit() {
-
+  $("#helpSplit").css("background","#222");
+  $($("[data-correct='false']")[0]).css("text-decoration","line-through")
+  $($("[data-correct='false']")[1]).css("text-decoration","line-through")
 }
 function helpPhone() {
   $("#helpPhone").css("background","#222");
@@ -152,6 +154,7 @@ function selectAnswer(caller, correct){
 
   if (correct){
     points++;
+    $("[data-money='"+points+"']").css("background","green")
     $("#nextButton").css("background","green");
 
     if (points>=12){
