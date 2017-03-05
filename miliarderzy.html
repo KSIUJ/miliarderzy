@@ -102,9 +102,9 @@
     </div>
     <div id="interaction">
       <div id="header">KSI Informatyczni Milionerzy</div>
-      <div id="body"><button onClick="nextQuestion()" id="startButton">zaczynamy!</button></div>
+      <div id="body"><button onClick="nextQuestion()" id="startButton">Zaczynamy!</button></div>
       <div id="controls">
-        <button onClick="helpSplit()" id="helpSplit">pół<br />na pół</button>
+        <button onClick="helpSplit()" id="helpSplit">50:50<br />&nbsp;</button>
         <button onClick="helpPhone()" id="helpPhone">telefon do<br />przyjaciela</button>
         <button onClick="helpQuestion()" id="helpQuestion">pytanie do<br />publiczności</button>
         <button onClick="nextQuestion()" id="nextButton" class="_greyButton">następne<br />pytanie</button>
@@ -181,7 +181,8 @@ function selectAnswer(caller, correct){
     $("[data-money='"+points+"']").css("background","green")
 
     if (points>=12){
-      $("#body").append('<button onClick="finish()" id="finishButton">zakończ<br />grę</button>')
+      //$("#body").append($("#finishButton").html())
+      $("#finishButton").addClass("_greenButton")
     }
     else{
       $("#nextButton").removeClass("_greyButton")
@@ -191,7 +192,7 @@ function selectAnswer(caller, correct){
   }
   else {
     $(caller).css("background","red");
-    $("#boddy").append('<button onClick="finish()" id="finishButton">zakończ<br />grę</button>')
+    $("#finishButton").addClass("_greenButton")
   }
 
   $(".answer").attr("onClick","");
