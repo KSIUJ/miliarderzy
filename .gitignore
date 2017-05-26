@@ -1,0 +1,18 @@
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+build/
+dist/
+logs
+project/project
+project/target
+target
+tmp
+.history
+/.idea_modules
+/.classpath
+/.project
+/RUNNING_PID
