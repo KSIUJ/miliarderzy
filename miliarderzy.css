@@ -1,0 +1,17 @@
+.question-container {
+    display: none;
+}
+
+.next-button {
+    display: none;
+}
+
+#timer {
+    display: none;
+}
+
+.custom-disabled {
+    background-color: #908d8d;
+    color: white;
+    pointer-events: none;
+}
