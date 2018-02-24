@@ -5,11 +5,76 @@
     <title>KSI Miliarderzy</title>
     <script src="vendor/jquery.min.js"></script>
     <script src="vendor/uikit.min.js"></script>
+    <script src="vendor/uikit-icons.min.js"></script>
     <link rel="stylesheet" type="text/css" href="vendor/uikit.min.css">
+    <link rel="stylesheet" type="text/css" href="miliarderzy.css">
     <script src="questions.js"></script>
     <script src="application.js"></script>
 </head>
 <body>
+<div id="call-friend" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <div class="uk-modal-header uk-text-center"><h2>Telefon do przyjaciela</h2></div>
+        Tylko raz w czasie gry możesz zadzwonić do przyjaciela z prośbą o pomoc.
+        Po nawiązaniu połączenia uruchomiony zostanie stoper, który odmierzy dokładnie 60 sek.
+        Po tym czasie połączenie musi zostać zakończone. Czy chcesz zadzwonić teraz?
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Nie teraz</button>
+            <button class="uk-button uk-button-primary uk-modal-close" type="button" onclick="callFriend()">Dzwonimy
+            </button>
+        </p>
+    </div>
+</div>
+<div id="ask-audience" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <div class="uk-modal-header uk-text-center"><h2>Pytanie do publiczności</h2></div>
+        Po wybraniu tego koła zegar zacznie odliczać 120 sekund, w czasie których możesz zapytać dowolną liczbę osób o
+        prawidłową odpowiedź.
+        Niedozwolone jest wyszukiwanie odpowiedzi w internecie. Koło można wykorzystać tylko raz w czasie gry.
+        Czy chcesz wykorzystać je teraz?
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Nie teraz</button>
+            <button class="uk-button uk-button-primary uk-modal-close button-apply" type="button"
+                    onclick="askAudience()">Pytamy
+            </button>
+        </p>
+    </div>
+</div>
+<div id="fifty-fifty" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <div class="uk-modal-header uk-text-center"><h2>50 na 50</h2></div>
+        Po wybraniu tego koła system odrzuci 2 błędne odpowiedzi pozostawiając 1 dobra i 1 złą.
+        Opcję tę można wykorzystać tylko 1 raz w czasie gry. Czy chcesz wykorzystać koło?
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Nie teraz</button>
+            <button class="uk-button uk-button-primary uk-modal-close button-apply" type="button"
+                    onclick="fiftyFifty()">
+                Odrzućmy błedne
+            </button>
+        </p>
+    </div>
+</div>
+<div id="won-milion" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <button class="uk-modal-close-default" type="button" uk-close onclick="loadHomeScreen()"></button>
+        <div class="uk-modal-header uk-text-center"><h2>Gratulacje!</h2></div>
+        Właśnie dołączyłeś do elitarnego grona KSIowych Milionerów - gratulujemy!
+        Odbierz swoją nagrodę u przedstawiciela Koła!
+    </div>
+</div>
+<div id="end-game" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <button class="uk-modal-close-default" type="button" uk-close onclick="loadHomeScreen()"></button>
+        <div class="uk-modal-header uk-text-center"><h2>Wynik</h2></div>
+        Kończysz grę z wynikiem <span> 10 </span> zł
+    </div>
+</div>
+<div id="end-of-time" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <button class="uk-modal-close-default" type="button" uk-close onclick="loadHomeScreen()"></button>
+        <div class="uk-text-center"><h2>Koniec czasu!</h2></div>
+    </div>
+</div>
 <nav class="uk-navbar" data-uk-sticky>
     <div class="uk-navbar-left">
         <div class="uk-navbar-item uk-logo">Informatyczni Milionerzy</div>
@@ -19,76 +84,108 @@
     </div>
 </nav>
 <div class="uk-container uk-container-large">
-    <ul class="uk-switcher" id="pages">
-        <li>
-            <div class="uk-grid-large" data-uk-grid>
-                <div class="uk-width-auto uk-text-center uk-card-small">
-                    <div class="uk-text-bold uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical">
-                        1 000 000
-                    </div>
-                    <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical">500
-                        000
-                    </div>
-                    <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical">250
-                        000
-                    </div>
-                    <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical">125
-                        000
-                    </div>
-                    <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical">75
-                        000
-                    </div>
-                    <div class="uk-text-bold uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical">
-                        40 000
-                    </div>
-                    <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical">20
-                        000
-                    </div>
-                    <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical">10
-                        000
-                    </div>
-                    <div class="uk-card uk-card-body uk-margin-small uk-label-warning uk-padding-remove-vertical">5
-                        000
-                    </div>
-                    <div class="uk-card uk-card-body uk-margin-small uk-label-success uk-padding-remove-vertical">2
-                        000
-                    </div>
-                    <div class="uk-text-bold uk-card uk-card-body uk-margin-small uk-label-success uk-padding-remove-vertical">
-                        1 000
-                    </div>
-                    <div class="uk-card uk-card-body uk-margin-small uk-label-success uk-padding-remove-vertical">500
+    <div class="uk-grid-large" data-uk-grid>
+        <div class="uk-width-auto uk-text-center uk-card-small">
+            <div class="uk-text-bold uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-11">
+                1 000 000
+            </div>
+            <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-10">
+                500 000
+            </div>
+            <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-9">
+                250 000
+            </div>
+            <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-8">
+                125 000
+            </div>
+            <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-7">
+                75 000
+            </div>
+            <div class="uk-text-bold uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-6">
+                40 000
+            </div>
+            <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-5">
+                20 000
+            </div>
+            <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-4">
+                10 000
+            </div>
+            <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-3">
+                5 000
+            </div>
+            <div class="uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-2">
+                2 000
+            </div>
+            <div class="uk-text-bold uk-card uk-card-body uk-margin-small uk-card-primary uk-padding-remove-vertical level-1">
+                1 000
+            </div>
+            <div class="uk-card uk-card-body uk-margin-small uk-label-warning uk-padding-remove-vertical level-0">
+                500
+            </div>
+        </div>
+        <div class="uk-width-expand">
+            <div class="uk-child-width-1-2@m uk-grid-match" uk-grid>
+                <div>
+                    <div id="timer" class="uk-text-left">
+                        <h3>Zostało <span id="timeleft">2:00</span> sek</h3>
                     </div>
                 </div>
-                <div class="uk-width-expand">
-                    <div class="uk-card uk-card-default uk-card-body">
-                        <div class="uk-text-center">
-                            <h2>
-                                Lorem ipsum dolor sit amet?
-                            </h2>
-                        </div>
-                        
-                        <div class="uk-margin">
-                            <button class="uk-margin-small uk-button uk-button-default uk-width-1-1"
-                                    style="text-transform: none"> consectetur adipiscing elit
-                            </button>
-                            <button class="uk-margin-small uk-button uk-button-default uk-width-1-1"
-                                    style="text-transform: none"> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                            </button>
-                            <button class="uk-margin-small uk-button uk-button-default uk-width-1-1"
-                                    style="text-transform: none"> Ut enim ad minim veniam
-                            </button>
-                            <button class="uk-margin-small uk-button uk-button-default uk-width-1-1"
-                                    style="text-transform: none">quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                            </button>
-                        </div>
+                <div>
+                    <div class="helpers uk-text-right">
+                        <a href="" class="uk-icon-button custom-disabled" uk-toggle="target: #call-friend"
+                           uk-icon="icon: receiver; ratio: 1" id="helper-phone"></a>
+                        <a href="" class="uk-icon-button custom-disabled" uk-toggle="target: #fifty-fifty"
+                           uk-icon="icon: italic; ratio: 1" id="helper-fifty"></a>
+                        <a href="" class="uk-icon-button custom-disabled" uk-toggle="target: #ask-audience"
+                           uk-icon="icon: users; ratio: 1" id="helper-audience"></a>
                     </div>
                 </div>
             </div>
-        </li>
-        <li>
-            sup
-        </li>
-    </ul>
+            <div class="uk-card uk-card-default uk-card-body intro-section">
+                <div class="uk-text-center intro-text">
+                    <h2>
+                        Czy chcesz rozpocząć swoją walkę o milion?
+                    </h2>
+                    <button class="uk-margin-small uk-button uk-button-default uk-button-primary uk-width-1-2@m start-button"
+                            style="text-transform: none" onclick="startGame()">
+                        Zaczynamy!
+                    </button>
+                </div>
+            </div>
+            <div class="uk-card uk-card-default uk-card-body question-container">
+                <div class="uk-text-center question-text">
+                    <h2>
+                        Lorem ipsum dolor sit amet?
+                    </h2>
+                </div>
+
+                <div class="uk-margin answer-container uk-text-center">
+                    <button class="uk-margin-small uk-button uk-button-default uk-width-1-2@m answer-button answer-0"
+                            style="text-transform: none" onclick="checkAnswer(this)">
+                        consectetur adipiscing elit
+                    </button>
+                    <button class="uk-margin-small uk-button uk-button-default uk-width-1-2@m answer-button answer-1"
+                            style="text-transform: none" onclick="checkAnswer(this)">
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                    </button>
+                    <button class="uk-margin-small uk-button uk-button-default uk-width-1-2@m answer-button answer-2"
+                            style="text-transform: none" onclick="checkAnswer(this)">
+                        Ut enim ad minim veniam
+                    </button>
+                    <button class="uk-margin-small uk-button uk-button-default uk-width-1-2@m answer-button answer-3"
+                            style="text-transform: none" onclick="checkAnswer(this)">
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+                    </button>
+                </div>
+
+                <button class="uk-margin-small uk-button uk-button-primary uk-width-1-1 next-button"
+                        style="text-transform: none" onclick="nextQuestion()">
+                    Następne pytanie
+                </button>
+
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
