@@ -87,7 +87,7 @@ function loadQuestion() {
     shuffle(answers);
 
     for (var i = 0; i < 4; i++) {
-        var answer = question.answers[i];
+        var answer = answers[i];
         var isCorrect = (correctAnswer === answer);
         var letter = String.fromCharCode(i + 65) + ") ";
         $('.answer-' + i).text(letter + answer);
