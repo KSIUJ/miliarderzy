@@ -83,7 +83,7 @@ function loadQuestion() {
     var question = questions[index];
     $(".question-text > h2").text(question.text);
     var correctAnswer = question.answers[0];
-    var answers = question.answers;
+    var answers = JSON.parse(JSON.stringify(question.answers));
     shuffle(answers);
 
     for (var i = 0; i < 4; i++) {
