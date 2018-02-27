@@ -20,7 +20,7 @@
         Po tym czasie połączenie musi zostać zakończone. Czy chcesz zadzwonić teraz?
         <p class="uk-text-right">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Nie teraz</button>
-            <button class="uk-button uk-button-primary uk-modal-close" type="button" onclick="callFriend()">Dzwonimy
+            <button class="uk-button uk-button-primary uk-modal-close" id="call-button" type="button">Dzwonimy
             </button>
         </p>
     </div>
@@ -34,8 +34,8 @@
         Czy chcesz wykorzystać je teraz?
         <p class="uk-text-right">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Nie teraz</button>
-            <button class="uk-button uk-button-primary uk-modal-close button-apply" type="button"
-                    onclick="askAudience()">Pytamy
+            <button class="uk-button uk-button-primary uk-modal-close button-apply" type="button" id="audience-button">
+                Pytamy
             </button>
         </p>
     </div>
@@ -48,7 +48,7 @@
         <p class="uk-text-right">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Nie teraz</button>
             <button class="uk-button uk-button-primary uk-modal-close button-apply" type="button"
-                    onclick="fiftyFifty()">
+                    id="fifty-button">
                 Odrzućmy błedne
             </button>
         </p>
@@ -56,7 +56,7 @@
 </div>
 <div id="won-milion" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
-        <button class="uk-modal-close-default" type="button" uk-close onclick="loadHomeScreen()"></button>
+        <button class="uk-modal-close-default load-homescreen" type="button" uk-close></button>
         <div class="uk-modal-header uk-text-center"><h2>Gratulacje!</h2></div>
         Właśnie dołączyłeś do elitarnego grona KSIowych Milionerów - gratulujemy!
         Odbierz swoją nagrodę u przedstawiciela Koła!
@@ -64,14 +64,14 @@
 </div>
 <div id="end-game" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
-        <button class="uk-modal-close-default" type="button" uk-close onclick="loadHomeScreen()"></button>
+        <button class="uk-modal-close-default load-homescreen" type="button" uk-close></button>
         <div class="uk-modal-header uk-text-center"><h2>Wynik</h2></div>
         Kończysz grę z wynikiem <span> 10 </span> zł
     </div>
 </div>
 <div id="end-of-time" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
-        <button class="uk-modal-close-default" type="button" uk-close onclick="loadHomeScreen()"></button>
+        <button class="uk-modal-close-default load-homescreen" type="button" uk-close></button>
         <div class="uk-text-center"><h2>Koniec czasu!</h2></div>
     </div>
 </div>
@@ -146,8 +146,9 @@
                     <h2>
                         Czy chcesz rozpocząć swoją walkę o milion?
                     </h2>
-                    <button class="uk-margin-small uk-button uk-button-default uk-button-primary uk-width-1-2@m start-button"
-                            style="text-transform: none" onclick="startGame()">
+                    <button class="uk-margin-small uk-button uk-button-default uk-button-primary uk-width-1-2@m "
+                            id="start-button"
+                            style="text-transform: none">
                         Zaczynamy!
                     </button>
                 </div>
@@ -161,25 +162,25 @@
 
                 <div class="uk-margin answer-container uk-text-center">
                     <button class="uk-margin-small uk-button uk-button-default uk-width-1-2@m answer-button answer-0"
-                            style="text-transform: none" onclick="checkAnswer(this)">
+                            style="text-transform: none">
                         consectetur adipiscing elit
                     </button>
                     <button class="uk-margin-small uk-button uk-button-default uk-width-1-2@m answer-button answer-1"
-                            style="text-transform: none" onclick="checkAnswer(this)">
+                            style="text-transform: none">
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
                     </button>
                     <button class="uk-margin-small uk-button uk-button-default uk-width-1-2@m answer-button answer-2"
-                            style="text-transform: none" onclick="checkAnswer(this)">
+                            style="text-transform: none">
                         Ut enim ad minim veniam
                     </button>
                     <button class="uk-margin-small uk-button uk-button-default uk-width-1-2@m answer-button answer-3"
-                            style="text-transform: none" onclick="checkAnswer(this)">
+                            style="text-transform: none">
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
                     </button>
                 </div>
 
-                <button class="uk-margin-small uk-button uk-button-primary uk-width-1-1 next-button"
-                        style="text-transform: none" onclick="nextQuestion()">
+                <button class="uk-margin-small uk-button uk-button-primary uk-width-1-1" id="next-button"
+                        style="text-transform: none">
                     Następne pytanie
                 </button>
 

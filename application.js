@@ -10,6 +10,7 @@ var isLost;
     if (numberOfQuestions < 12) {
         alert("You need at least 12 questions!");
     }
+
 })();
 
 function loadHomeScreen() {
@@ -40,13 +41,13 @@ function endGame() {
     UIkit.modal("#end-game").show();
 }
 
-function checkAnswer(event) {
-    $(event).css("border", "5px solid gold");
-    var isCorrect = $(event).attr("data-correct");
+function checkAnswer() {
+    $(this).css("border", "5px solid gold");
+    var isCorrect = $(this).attr("data-correct");
     if (isCorrect === 'false') {
         isLost = true;
         $(".next-button").text("Zobacz wygraną");
-        $(event).css("background-color", '#d32c46');
+        $(this).css("background-color", '#d32c46');
         for (var i = 0; i < 4; i++) {
             var isCorrect = $(".answer-" + i).attr("data-correct");
             if (isCorrect !== 'false') {
@@ -55,7 +56,7 @@ function checkAnswer(event) {
             $(".answer-" + i).attr("disabled", true);
         }
     } else {
-        $(event).css("background-color", '#32d296');
+        $(this).css("background-color", '#32d296');
         $(".level-" + currLevel).removeClass("uk-label-warning");
         $(".level-" + currLevel).addClass("uk-label-success");
         for (var i = 0; i < 4; i++) {
@@ -82,8 +83,8 @@ function loadQuestion() {
     var index = chooseQuestion();
     var question = questions[index];
     $(".question-text > h2").text(question.text);
-    var correctAnswer = question.answers[0];
-    var answers = JSON.parse(JSON.stringify(question.answers));
+    var correctAnswer = question.correct;
+    var answers = question.answers;
     shuffle(answers);
 
     for (var i = 0; i < 4; i++) {
@@ -174,3 +175,13 @@ function setHelpers(val){
     }
 
 }
+
+$(document).ready(function(e) {
+    $('#start-button').click(startGame);
+    $('#call-button').click(callFriend);
+    $('#audience-button').click(askAudience);
+    $("#fifty-button").click(fiftyFifty);
+    $(".load-homescreen").click(loadHomeScreen);
+    $(".answer-button").click(checkAnswer);
+    $("#next-button").click(nextQuestion);
+});
