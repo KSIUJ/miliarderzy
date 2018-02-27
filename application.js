@@ -1,22 +1,21 @@
 var levels = [500, 1000, 2000, 5000, 10000, 20000, 40000, 75000, 125000, 250000, 500000, 1000000];
-var currLevel;
-var points;
-var usedQuestions;
-var numberOfQuestions;
-var isLost;
+var currLevel, points, usedQuestions, i, numberOfQuestions, isLost,
+    downloadTimer, timer_elem, helper_audience_elem, helper_fifty_elem,
+    helper_phone_elem, next_button_elem, timeleft_elem,
+    intro_elem, question_container_elem;
+
 
 (function () {
     numberOfQuestions = questions.length;
     if (numberOfQuestions < 12) {
         alert("You need at least 12 questions!");
     }
-
 })();
 
 function loadHomeScreen() {
-    $('.intro-section').show();
-    $('.question-container').hide();
-    $(".next-button").text("Nastepne pytanie");
+    intro_elem.show();
+    question_container_elem.hide();
+    next_button_elem.text("Nastepne pytanie");
     $(".level-" + currLevel).removeClass("uk-label-warning");
     for (var i = 0; i < currLevel + 1; i++) {
         $(".level-" + i).removeClass("uk-label-success");
@@ -30,8 +29,8 @@ function startGame() {
     currLevel = 0;
     isLost = false;
     usedQuestions = [];
-    $('.intro-section').hide();
-    $('.question-container').show();
+    intro_elem.hide();
+    question_container_elem.show();
     loadQuestion();
     setHelpers('start');
 }
@@ -42,29 +41,32 @@ function endGame() {
 }
 
 function checkAnswer() {
+    stopTimer();
     $(this).css("border", "5px solid gold");
     var isCorrect = $(this).attr("data-correct");
     if (isCorrect === 'false') {
         isLost = true;
-        $(".next-button").text("Zobacz wygraną");
+        next_button_elem.text("Zobacz wygraną");
         $(this).css("background-color", '#d32c46');
-        for (var i = 0; i < 4; i++) {
-            var isCorrect = $(".answer-" + i).attr("data-correct");
+        for (i = 0; i < 4; i++) {
+            var ans_elem = $(".answer-" + i);
+            isCorrect = ans_elem.attr("data-correct");
             if (isCorrect !== 'false') {
-                $(".answer-" + i).css("background-color", '#32d296');
+                ans_elem.css("background-color", '#32d296');
             }
-            $(".answer-" + i).attr("disabled", true);
+            ans_elem.attr("disabled", true);
         }
     } else {
         $(this).css("background-color", '#32d296');
-        $(".level-" + currLevel).removeClass("uk-label-warning");
-        $(".level-" + currLevel).addClass("uk-label-success");
-        for (var i = 0; i < 4; i++) {
+        var level_elem = $(".level-" + currLevel);
+        level_elem.removeClass("uk-label-warning");
+        level_elem.addClass("uk-label-success");
+        for (i = 0; i < 4; i++) {
             $(".answer-" + i).attr("disabled", true);
         }
         currLevel++;
     }
-    $(".next-button").show();
+    next_button_elem.show();
 }
 
 function nextQuestion() {
@@ -75,7 +77,7 @@ function nextQuestion() {
     } else {
         UIkit.modal("#won-milion").show();
     }
-    $(".next-button").hide();
+    next_button_elem.hide();
 }
 
 function loadQuestion() {
@@ -91,11 +93,10 @@ function loadQuestion() {
         var answer = answers[i];
         var isCorrect = (correctAnswer === answer);
         var letter = String.fromCharCode(i + 65) + ") ";
-        $('.answer-' + i).text(letter + answer);
-        $('.answer-' + i).attr("data-correct", isCorrect);
-        $('.answer-' + i).css("background-color", "");
-        $('.answer-' + i).css("border", "");
-        $('.answer-' + i).attr("disabled", false);
+        var answers_elem = $('.answer-' + i);
+        answers_elem.text(letter + answer);
+        answers_elem.attr("disabled", false).attr("data-correct", isCorrect);
+        answers_elem.css("background-color", "").css("border", "");
     }
 }
 
@@ -116,7 +117,7 @@ function chooseQuestion() {
 }
 
 function shuffle(array) {
-    for (var i = array.length - 1; i > 0; i--) {
+    for (i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var x = array[i];
         array[i] = array[j];
@@ -125,63 +126,80 @@ function shuffle(array) {
 }
 
 function fiftyFifty() {
-    $("#helper-fifty").addClass("custom-disabled");
+    stopTimer();
+    helper_fifty_elem.addClass("custom-disabled");
     var choosen = [];
     while (choosen.length < 2) {
         var number = Math.floor(Math.random() * 4);
         if (choosen.indexOf(number) < 0) {
-            var isCorrect = $('.answer-' + number).attr("data-correct");
+            var ans_elem = $('.answer-' + number);
+            var isCorrect = ans_elem.attr("data-correct");
             if (isCorrect !== 'true') {
-                $('.answer-' + number).attr("disabled", true);
+                ans_elem.attr("disabled", true);
                 choosen.push(number);
             }
         }
     }
 }
 
+function stopTimer() {
+    clearInterval(downloadTimer);
+    timer_elem.hide();
+}
+
 function askAudience() {
-    $("#helper-audience").addClass("custom-disabled");
+    stopTimer();
+    helper_audience_elem.addClass("custom-disabled");
     countdown(120);
 }
 
 function callFriend() {
-    $("#helper-phone").addClass("custom-disabled");
+    stopTimer();
+    helper_phone_elem.addClass("custom-disabled");
     countdown(60);
 }
 
 function countdown(time) {
-    $("#timeleft").text(time);
-    $("#timer").show();
-    var downloadTimer = setInterval(function () {
+    timeleft_elem.text(time);
+    timer_elem.show();
+    downloadTimer = setInterval(function () {
         time--;
-        $("#timeleft").text(time);
+        timeleft_elem.text(time);
         if (time <= 0) {
             clearInterval(downloadTimer);
             UIkit.modal("#end-of-time").show();
-            $('#timer').hide();
+            timer_elem.hide();
         }
     }, 1000);
 }
 
-function setHelpers(val){
+function setHelpers(val) {
     if (val === 'disabled') {
-        $("#helper-audience").addClass("custom-disabled");
-        $("#helper-fifty").addClass("custom-disabled");
-        $("#helper-phone").addClass("custom-disabled");
-    }else {
-        $("#helper-audience").removeClass("custom-disabled");
-        $("#helper-fifty").removeClass("custom-disabled");
-        $("#helper-phone").removeClass("custom-disabled");
+        helper_audience_elem.addClass("custom-disabled");
+        helper_fifty_elem.addClass("custom-disabled");
+        helper_phone_elem.addClass("custom-disabled");
+    } else {
+        helper_audience_elem.removeClass("custom-disabled");
+        helper_fifty_elem.removeClass("custom-disabled");
+        helper_phone_elem.removeClass("custom-disabled");
     }
-
 }
 
-$(document).ready(function(e) {
+$(document).ready(function (e) {
+    timer_elem = $('#timer');
+    helper_audience_elem = $("#helper-audience");
+    helper_fifty_elem = $("#helper-fifty");
+    helper_phone_elem = $("#helper-phone");
+    next_button_elem = $("#next-button");
+    timeleft_elem = $("#timeleft");
+    intro_elem = $('.intro-section');
+    question_container_elem = $('.question-container');
+
     $('#start-button').click(startGame);
     $('#call-button').click(callFriend);
     $('#audience-button').click(askAudience);
     $("#fifty-button").click(fiftyFifty);
     $(".load-homescreen").click(loadHomeScreen);
     $(".answer-button").click(checkAnswer);
-    $("#next-button").click(nextQuestion);
+    next_button_elem.click(nextQuestion);
 });
