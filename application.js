@@ -42,22 +42,24 @@ function endGame() {
 
 function checkAnswer() {
     stopTimer();
-    $(this).css("border", "5px solid gold");
+    var el = $(this);
+    el.addClass("selected");
+    el.redraw();
     var isCorrect = $(this).attr("data-correct");
     if (isCorrect === 'false') {
         isLost = true;
         next_button_elem.text("Zobacz wygraną");
-        $(this).css("background-color", '#d32c46');
+        $(this).addClass('incorrect-answer').redraw();
         for (i = 0; i < 4; i++) {
             var ans_elem = $(".answer-" + i);
             isCorrect = ans_elem.attr("data-correct");
             if (isCorrect !== 'false') {
-                ans_elem.css("background-color", '#32d296');
+                ans_elem.addClass('correct-answer').redraw();
             }
             ans_elem.attr("disabled", true);
         }
     } else {
-        $(this).css("background-color", '#32d296');
+        $(this).addClass('correct-answer').redraw();
         var level_elem = $(".level-" + currLevel);
         level_elem.removeClass("uk-label-warning");
         level_elem.addClass("uk-label-success");
@@ -96,7 +98,8 @@ function loadQuestion() {
         var answers_elem = $('.answer-' + i);
         answers_elem.text(letter + answer);
         answers_elem.attr("disabled", false).attr("data-correct", isCorrect);
-        answers_elem.css("background-color", "").css("border", "");
+        answers_elem.removeClass('selected').removeClass('correct-answer')
+            .removeClass('incorrect-answer').redraw();
     }
 }
 
@@ -185,6 +188,12 @@ function setHelpers(val) {
     }
 }
 
+$.fn.redraw = function () {
+    $(this).each(function () {
+        var redraw = this.offsetHeight;
+    });
+};
+
 $(document).ready(function (e) {
     timer_elem = $('#timer');
     helper_audience_elem = $("#helper-audience");
@@ -203,3 +212,4 @@ $(document).ready(function (e) {
     $(".answer-button").click(checkAnswer);
     next_button_elem.click(nextQuestion);
 });
+
