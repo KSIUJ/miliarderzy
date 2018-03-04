@@ -15,3 +15,15 @@
     color: white;
     pointer-events: none;
 }
+
+.selected {
+    border: 5px solid gold!important;
+}
+
+.correct-answer {
+    background-color: #32d296!important;
+}
+
+.incorrect-answer {
+    background-color: #d32c46!important;
+}
