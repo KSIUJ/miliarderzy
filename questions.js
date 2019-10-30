@@ -182,5 +182,30 @@
         text: "Używanie której technologii NIE poprawi naszego bezpieczeństwa w internecie?",
         answers: ["HTTP", "VPN", "TLS", "SFTP"],
         correct: "HTTP"
+    },
+    {
+        text: "Co to jest phishing?", 
+        answers: ["Oszustwo polegające na zdobyciu zaufania ofiary przez podszycie się pod inną osobę lub instytucję w celu wyłudzenia danych", "Popularny żart internetowy, w którym odbiorcy komentują post wyłącznie słowem ,phi'", "Nazwa popularnej strony z komiksami", "Zdobywanie nowych użytkowników aplikacji przez infekowanie ich komputerów"],
+        correct: "Oszustwo polegające na zdobyciu zaufania ofiary przez podszycie się pod inną osobę lub instytucję w celu wyłudzenia danych"
+    }, 
+    {
+        text: "Na co należy zwrócić uwagę zanim udzielisz aplikacji zgody na dostęp do Twoich danych?",
+        answers: ["Wszystkie odpowiedzi są prawidłowe", "Regulamin", "Do czego dokładnie aplikacja chce uzyskać dostęp", "Czy aplikacja pochodzi ze sprawdzonego źródła (App Store/Google Play)"],
+        correct: "Wszystkie odpowiedzi są prawidłowe"
+    },
+    {
+        text: "Jakie rzeczy należy sprawdzić gdy kupujemy coś przez internet?",
+        answers: ["Wszystkie odpowiedzi są prawidłowe", "Czy adres strony zaczyna się od https", "Czy obok adresu znajduje się symbol zielonej kłodki", "Jakie opinie wystawili sprzedającemu poprzedni kupujący"],
+        correct: 'Wszystkie odpowiedzi są prawidłowe'
+    },
+    {
+        text: "Jakie powinny być bezpieczne hasła do kont internetowych (np skrzynki e-mail, Facebooka, itp)",
+        answers: ["Długie, różne dla każdego konta, zawierające duże i małe litery, cyfry i znaki specjalne.", "Krótkie i łatwe do zapamiętania.", "Powinno się używać jednego hasła do wszystkich kont.", "Średniej długości, łatwe do zapamiętania frazy + cyfra na końcu."],
+        correct: 'Długie, różne dla każdego konta, zawierające duże i małe litery, cyfry i znaki specjalne.'
+    },
+    {
+        text: "Który z wymienionych elementów może wskazywać na to, że wysłana do nas wiadomość jest próbą wyłudzenia danych?",
+        answers: ["Wszystkie odpowiedzi są prawidłowe", "Niepoprawny język, niepasujące słowa w środku zdania (np pochodzące z innego języka), literówki.", "Zbyt atrakcyjna oferta (np najnowszy iPhone za darmo)", "Podszywanie się pod inny adres (np alllegro.pl zamiast allegro.pl)"],
+        correct: 'Wszystkie odpowiedzi są prawidłowe'
     }
 ];
